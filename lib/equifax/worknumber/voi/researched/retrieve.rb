@@ -4,12 +4,12 @@ module Equifax
       module Researched
         class Retrieve < ::Equifax::Worknumber::Base
           def self.call(opts)
-            voe = Equifax::Worknumber::VOI::Researched::Retrieve.new(opts)
+            voi = Equifax::Worknumber::VOI::Researched::Retrieve.new(opts)
 
             Equifax::Client.request(
-              voe.send(:url),
+              voi.send(:url),
               { request_method: :post },
-              voe.send(:request_params),
+              voi.send(:request_params),
             )
           end
 

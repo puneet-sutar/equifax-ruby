@@ -4,17 +4,20 @@ module Equifax
       module Researched
         class Status < ::Equifax::Worknumber::Base
           def self.call(opts)
-            voe = Equifax::Worknumber::VOE::Researched::Status.new(opts)
+            voi = Equifax::Worknumber::VOI::Researched::Status.new(opts)
 
             Equifax::Client.request(
-              voe.send(:url),
+              voi.send(:url),
               { request_method: :post },
-              voe.send(:request_params),
+              voi.send(:request_params),
             )
           end
 
           def self.required_fields
-            super + [:order_number]
+            super + [
+              :order_number,
+              :organization_name,
+            ]
           end
 
           def xml

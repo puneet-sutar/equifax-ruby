@@ -4,24 +4,20 @@ module Equifax
       module Researched
         class Submit < ::Equifax::Worknumber::Base
           def self.call(opts)
-            voe = Equifax::Worknumber::VOI::Researched::Submit.new(opts)
+            voi = Equifax::Worknumber::VOI::Researched::Submit.new(opts)
 
             Equifax::Client.request(
-              voe.send(:url),
+              voi.send(:url),
               { request_method: :post },
-              voe.send(:request_params),
+              voi.send(:request_params),
             )
-          end
-
-          def params
-            self.send(:opts)
           end
 
           def self.required_fields
             super + [
               :authform_name,
               :authform_content,
-              # :organization_name,
+              :organization_name,
             ]
           end
 
@@ -36,28 +32,28 @@ module Equifax
             <<-eos
               <?xml version="1.0" encoding="utf-8"?>
               <REQUEST_GROUP MISMOVersionID="2.3.1">
-                <REQUESTING_PARTY _Name="#{params.fetch(:vendor_id, '')}"/>
-                <SUBMITTING_PARTY _Name="#{params.fetch(:employer_name, '')}"/>
-                <REQUEST InternalAccountIdentifier="#{params.fetch(:account_number, '')}" LoginAccountIdentifier="#{params.fetch(:account_number, '')}" LoginAccountPassword="#{params.fetch(:password, '')}" RequestingPartyBranchIdentifier="#{params.fetch(:organization_name, '')}">
-                  <KEY _Name="EMSEmployerCode" _Value="#{params.fetch(:employer_code, '')}"/>
-                  <KEY _Name="EMSEmployerDunsNumber" _Value="#{params.fetch(:employer_duns_number, '')}"/>
-                  <KEY _Name="EMSEmployerDivision" _Value="#{params.fetch(:employer_division, '')}"/>
+                <REQUESTING_PARTY _Name="#{vendor_id}"/>
+                <SUBMITTING_PARTY _Name="#{employer_name}"/>
+                <REQUEST InternalAccountIdentifier="#{account_number}" LoginAccountIdentifier="#{account_number}" LoginAccountPassword="#{password}" RequestingPartyBranchIdentifier="#{organization_name}">
+                  <KEY _Name="EMSEmployerCode" _Value="#{employer_code}"/>
+                  <KEY _Name="EMSEmployerDunsNumber" _Value="#{employer_duns_number}"/>
+                  <KEY _Name="EMSEmployerDivision" _Value="#{employer_division}"/>
                   <KEY _Name="EmployerVerificationDocumentsRequired" _Value="N"/>
                   <KEY _Name="CallRecordingRequired" _Value="N"/>
                   <REQUEST_DATA>
-                    <VOI_REQUEST LenderCaseIdentifier="#{params.fetch(:lender_case_id, '')}" RequestingPartyRequestedByName="#{params.fetch(:lender_name, '')}">
+                    <VOI_REQUEST LenderCaseIdentifier="#{lender_case_id}" RequestingPartyRequestedByName="#{lender_name}">
                       <VOI_REQUEST_DATA VOIReportType="Other" VOIReportTypeOtherDescription="RVVOI" VOIRequestType="Individual" VOIReportRequestActionType="Submit" BorrowerID="Borrower"/>
                       <LOAN_APPLICATION>
-                        <BORROWER BorrowerID="Borrower" _FirstName="#{params.fetch(:first_name, '')}" _MiddleName="#{params.fetch(:middle_name, '')}" _LastName="#{params.fetch(:last_name, '')}" _PrintPositionType="Borrower" _SSN="#{params.fetch(:ssn, '')}">
-                          <_RESIDENCE _StreetAddress="#{params.fetch(:street_address, '')}" _City="#{params.fetch(:city, '')}" _State="#{params.fetch(:state, '')}" _PostalCode="#{params.fetch(:postal_code, '')}" BorrowerResidencyType="Current"/>
-                          <EMPLOYER _Name="#{params.fetch(:employer_name, '')}" _TelephoneNumber="#{params.fetch(:employer_phone, '')}" _StreetAddress="#{params.fetch(:employer_address, '')}" _City="#{params.fetch(:employer_city, '')}" _State="#{params.fetch(:employer_state, '')}" _PostalCode="#{params.fetch(:employer_postal_code, '')}"/>
+                        <BORROWER BorrowerID="Borrower" _FirstName="#{first_name}" _MiddleName="#{middle_name}" _LastName="#{last_name}" _PrintPositionType="Borrower" _SSN="#{ssn}">
+                          <_RESIDENCE _StreetAddress="#{street_address}" _City="#{city}" _State="#{state}" _PostalCode="#{postal_code}" BorrowerResidencyType="Current"/>
+                          <EMPLOYER _Name="#{employer_name}" _TelephoneNumber="#{employer_phone}" _StreetAddress="#{employer_address}" _City="#{employer_city}" _State="#{employer_state}" _PostalCode="#{employer_postal_code}"/>
                         </BORROWER>
                       </LOAN_APPLICATION>
                       <EXTENSION>
                         <EXTENSION_SECTION>
                           <EXTENSION_SECTION_DATA>
-                            <EMBEDDED_FILE MIMEType="application/pdf" _Name="#{params.fetch(:authform_name, '')}" _EncodingType="Base64" _Type="pdf">
-                              <DOCUMENT>#{params.fetch(:authform_content, '')}
+                            <EMBEDDED_FILE MIMEType="application/pdf" _Name="#{authform_name}" _EncodingType="Base64" _Type="pdf">
+                              <DOCUMENT>#{authform_content}
                               </DOCUMENT>
                             </EMBEDDED_FILE>
                           </EXTENSION_SECTION_DATA>
