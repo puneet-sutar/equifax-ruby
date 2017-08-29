@@ -3,7 +3,6 @@ module Equifax
     module VOE
       module Researched
         class Submit < ::Equifax::Worknumber::Base
-
           def self.call(opts)
             voe = Equifax::Worknumber::VOE::Researched::Submit.new(opts)
 
@@ -15,7 +14,7 @@ module Equifax
           end
 
           def self.required_fields
-            super + [
+            ::Equifax::Worknumber::Base.required_fields + [
               :authform_name,
               :authform_content,
               :organization_name,
@@ -23,7 +22,7 @@ module Equifax
           end
 
           def self.optional_fields
-            super + [
+            ::Equifax::Worknumber::Base.optional_fields + [
               :employer_duns_number,
               :employer_division,
             ]

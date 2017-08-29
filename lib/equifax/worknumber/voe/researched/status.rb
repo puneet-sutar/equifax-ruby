@@ -31,7 +31,7 @@ module Equifax
                       <VOI_REQUEST_DATA VOIReportType="Other" VOIReportTypeOtherDescription="rvvoe" VOIRequestType="Individual" VOIRequestID="RVVOESQ1" VOIReportRequestActionType="StatusQuery" BorrowerID="Borrower"/>
                       <LOAN_APPLICATION>
                         <BORROWER BorrowerID="Borrower" _FirstName="#{first_name}" _MiddleName="#{middle_name}" _LastName="#{last_name}" _PrintPositionType="Borrower" _SSN="#{ssn}">
-                          <_RESIDENCE _StreetAddress="#{address}" _City="#{city}" _State="#{state}" _PostalCode="#{postal_code}" BorrowerResidencyType="Current"/>
+                          <_RESIDENCE _StreetAddress="#{street_address}" _City="#{city}" _State="#{state}" _PostalCode="#{postal_code}" BorrowerResidencyType="Current"/>
                         </BORROWER>
                       </LOAN_APPLICATION>
                     </VOI_REQUEST>

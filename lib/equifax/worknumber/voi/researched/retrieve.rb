@@ -14,7 +14,10 @@ module Equifax
           end
 
           def self.required_fields
-            super + [:order_number, :organization_name]
+            ::Equifax::Worknumber::Base.required_fields + [
+              :order_number,
+              :organization_name,
+            ]
           end
 
           def xml
