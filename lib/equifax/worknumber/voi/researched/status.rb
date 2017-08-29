@@ -14,7 +14,7 @@ module Equifax
           end
 
           def self.required_fields
-            super::REQUIRED_FIELDS + [:order_number]
+            super + [:order_number]
           end
 
           def xml

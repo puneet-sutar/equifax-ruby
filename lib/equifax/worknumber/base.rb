@@ -53,7 +53,7 @@ module Equifax
       self.class_eval do
         self.required_fields.each do |attr|
           define_method(attr) do
-            fetch_attribute(attr)
+            fetch_attribute(attr, '')
           end
         end
 
