@@ -1,9 +1,9 @@
 module Equifax
   module Worknumber
-    module VOE
+    module VOI
       class Reverify < ::Equifax::Worknumber::Base
         def self.call(opts)
-          voe = Equifax::Worknumber::VOE::Reverify.new(opts)
+          voe = Equifax::Worknumber::VOI::Reverify.new(opts)
 
           Equifax::Client.request(
             voe.send(:url),
@@ -24,12 +24,11 @@ module Equifax
                 <REQUEST_DATA>
                   <VOI_REQUEST LenderCaseIdentifier="#{lender_case_id}">
                     <VOI_REQUEST_DATA
-                      VOIReportTypeOtherDescription="RVVOE"
+                      VOIReportTypeOtherDescription="RVVOI"
                       VOIReportRequestActionType="Other"
                       VOIReportRequestActionTypeOtherDescription="Reverify" />
                     <LOAN_APPLICATION>
-                      <BORROWER _FirstName="#{first_name}" _LastName="#{last_name}" _SSN="#{ssn}" _PrintPositionType="Borrower">
-                      </BORROWER>
+                      <BORROWER _FirstName="#{first_name}" _LastName="#{last_name}" _SSN="#{ssn}" _PrintPositionType="Borrower"></BORROWER>
                     </LOAN_APPLICATION>
                   </VOI_REQUEST>
                 </REQUEST_DATA>
