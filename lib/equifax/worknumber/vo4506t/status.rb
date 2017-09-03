@@ -2,36 +2,36 @@ module Equifax
   module Worknumber
     module VO4506T
       class Status < ::Equifax::Worknumber::VO4506T::Base
-        # def self.required_fields
-        #   ::Equifax::Worknumber::Base.required_fields + [
-        #     :order_number,
-        #     :organization_name,
-        #   ]
-        # end
+        def self.required_fields
+          super + [ :order_number ]
+        end
+
+        def self.optional_fields
+          super + [ :request_date ]
+        end
+
         private
 
-        def xml
-          <<-eos
-              <?xml version="1.0" encoding="utf-8"?>
-              <REQUEST_GROUP MISMOVersionID="2.3.1">
-                <SUBMITTING_PARTY _Name="#{vendor_id}"/>
-                <REQUEST InternalAccountIdentifier="#{account_number}" LoginAccountIdentifier="#{account_number}" LoginAccountPassword="#{password}" RequestingPartyBranchIdentifier="#{organization_name}">
-                  <!--    <KEY _Name="getTestOFXResponse" _Value="" /> -->
-                  <KEY _Name="EMSEmployerCode" _Value="#{employer_code}"/>
-                  <KEY _Name="EMSOrderNumber" _Value="#{order_number}"/>
-                  <REQUEST_DATA>
-                    <VOI_REQUEST LenderCaseIdentifier="#{lender_case_id}" RequestingPartyRequestedByName="#{lender_name}">
-                      <VOI_REQUEST_DATA VOIReportType="Other" VOIReportTypeOtherDescription="rvvoi" VOIRequestType="Individual" VOIRequestID="RVVOESQ1" VOIReportRequestActionType="StatusQuery" BorrowerID="Borrower"/>
-                      <LOAN_APPLICATION>
-                        <BORROWER BorrowerID="Borrower" _FirstName="#{first_name}" _MiddleName="#{middle_name}" _LastName="#{last_name}" _PrintPositionType="Borrower" _SSN="#{ssn}">
-                          <_RESIDENCE _StreetAddress="#{street_address}" _City="#{city}" _State="#{state}" _PostalCode="#{postal_code}" BorrowerResidencyType="Current"/>
-                        </BORROWER>
-                      </LOAN_APPLICATION>
-                    </VOI_REQUEST>
-                  </REQUEST_DATA>
-                </REQUEST>
-              </REQUEST_GROUP>
-          eos
+        def action_type
+          "StatusQuery"
+        end
+
+        def xml_builder
+          xml_container do |xml|
+            xml.SUBMITTING_PARTY _Name: vendor_id,
+                                 LoginAccountIdentifier: account_number,
+                                 LoginAccountPassword: password
+            xml.REQUEST RequestDatetime: request_date do
+              xml.KEY _Name: "EMSOrderNumber", _Value: order_number
+              xml.REQUEST_DATA do
+                xml.VOI_REQUEST MISMOVersionID: mismo_version_id do
+                  xml.VOI_REQUEST_DATA VOIRequestType: "Individual",
+                                       VOIReportRequestActionType: action_type,
+                                       VOIReportType: "Other"
+                end
+              end
+            end
+          end
         end
       end
     end
