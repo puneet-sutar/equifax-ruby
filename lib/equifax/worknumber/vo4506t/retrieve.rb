@@ -4,7 +4,7 @@ module Equifax
       class Retrieve < ::Equifax::Worknumber::VO4506T::Status
         # API for retrive and status is same, only differece is VOIReportRequestActionType
         def action_type
-          "StatusQuery"
+          "Retrieve"
         end
       end
     end
