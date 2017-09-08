@@ -23,31 +23,19 @@ module Equifax
           def xml
             <<-eos
               <?xml version="1.0" encoding="utf-8"?>
-              <REQUEST_GROUP MISMOVersionID="2.3.1">
-                <SUBMITTING_PARTY _Name="#{vendor_id}" />
-                <REQUEST InternalAccountIdentifier="#{account_number}"
-                  LoginAccountIdentifier="#{account_number}" LoginAccountPassword="#{password}"
-                  RequestingPartyBranchIdentifier="#{organization_name}">
-                  <KEY _Name="EMSEmployerCode" _Value="#{employer_code}" />
+              <REQUEST_GROUP>
+                <SUBMITTING_PARTY _Name="#{vendor_id}"></SUBMITTING_PARTY>
+                <REQUEST LoginAccountIdentifier="#{account_number}" LoginAccountPassword="#{password}">
                   <KEY _Name="EMSOrderNumber" _Value="#{order_number}" />
                   <REQUEST_DATA>
-                    <VOI_REQUEST LenderCaseIdentifier="#{lender_case_id}"
-                      RequestingPartyRequestedByName="QTP">
-                      <VOI_REQUEST_DATA VOIReportType="Other"
-                        VOIReportTypeOtherDescription="RVVOI" VOIRequestType="Individual"
-                        VOIRequestID="RVVOI_RETRIEVE" VOIReportRequestActionType="Retrieve"
-                        BorrowerID="Borrower" />
+                    <VOI_REQUEST LenderCaseIdentifier="#{lender_case_id}">
+                      <VOI_REQUEST_DATA VOIReportRequestActionType="Retrieve" VOIReportTypeOtherDescription="RVVOI"/>
                       <LOAN_APPLICATION>
-                        <BORROWER BorrowerID="Borrower" _FirstName="#{first_name}"
-                          _MiddleName="#{middle_name}" _LastName="#{last_name}" _PrintPositionType="Borrower"
-                          _SSN="799005001">
-                          <_RESIDENCE _StreetAddress="#{street_address}" _City="#{city}"
-                            _State="#{state}" _PostalCode="#{postal_code}" BorrowerResidencyType="Current" />
-                        </BORROWER>
+                        <BORROWER _FirstName="#{first_name}" _LastName="#{last_name}" _SSN="#{ssn}" _PrintPositionType="Borrower"></BORROWER>
                       </LOAN_APPLICATION>
                     </VOI_REQUEST>
                   </REQUEST_DATA>
-                </REQUEST>
+               </REQUEST>
               </REQUEST_GROUP>
             eos
           end

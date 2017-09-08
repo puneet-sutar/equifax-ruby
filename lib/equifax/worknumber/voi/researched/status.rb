@@ -23,18 +23,15 @@ module Equifax
           def xml
             <<-eos
               <?xml version="1.0" encoding="utf-8"?>
-              <REQUEST_GROUP MISMOVersionID="2.3.1">
+              <REQUEST_GROUP>
                 <SUBMITTING_PARTY _Name="#{vendor_id}"/>
-                <REQUEST InternalAccountIdentifier="#{account_number}" LoginAccountIdentifier="#{account_number}" LoginAccountPassword="#{password}" RequestingPartyBranchIdentifier="#{organization_name}">
-                  <!--    <KEY _Name="getTestOFXResponse" _Value="" /> -->
-                  <KEY _Name="EMSEmployerCode" _Value="#{employer_code}"/>
+                <REQUEST LoginAccountIdentifier="#{account_number}" LoginAccountPassword="#{password}">
                   <KEY _Name="EMSOrderNumber" _Value="#{order_number}"/>
                   <REQUEST_DATA>
-                    <VOI_REQUEST LenderCaseIdentifier="#{lender_case_id}" RequestingPartyRequestedByName="#{lender_name}">
-                      <VOI_REQUEST_DATA VOIReportType="Other" VOIReportTypeOtherDescription="rvvoi" VOIRequestType="Individual" VOIRequestID="RVVOESQ1" VOIReportRequestActionType="StatusQuery" BorrowerID="Borrower"/>
+                    <VOI_REQUEST LenderCaseIdentifier="#{lender_case_id}">
+                      <VOI_REQUEST_DATA VOIReportTypeOtherDescription="rvvoi" VOIReportRequestActionType="StatusQuery"/>
                       <LOAN_APPLICATION>
-                        <BORROWER BorrowerID="Borrower" _FirstName="#{first_name}" _MiddleName="#{middle_name}" _LastName="#{last_name}" _PrintPositionType="Borrower" _SSN="#{ssn}">
-                          <_RESIDENCE _StreetAddress="#{street_address}" _City="#{city}" _State="#{state}" _PostalCode="#{postal_code}" BorrowerResidencyType="Current"/>
+                        <BORROWER _FirstName="#{first_name}" _MiddleName="#{middle_name}" _LastName="#{last_name}" _SSN="#{ssn}" _PrintPositionType="Borrower">
                         </BORROWER>
                       </LOAN_APPLICATION>
                     </VOI_REQUEST>

@@ -73,33 +73,6 @@ module Equifax
         ]
       end
 
-      # self.class_eval do
-      #   self.required_fields.each do |attr|
-      #     define_method(attr) do
-      #       fetch_attribute(attr)
-      #     end
-      #   end
-
-      #   self.either_field_required.each do |pair|
-      #     pair.each do |attr|
-      #       define_method(attr) do
-      #         # Check for either or
-      #         unless opts[pair[0]] || opts[pair[1]]
-      #           raise ArgumentError, "Provide either #{pair[0]} or #{pair[1]}"
-      #         end
-
-      #         fetch_attribute(attr, '')
-      #       end
-      #     end
-      #   end
-
-      #   self.optional_fields.each do |attr|
-      #     define_method(attr) do
-      #       fetch_attribute(attr, '')
-      #     end
-      #   end
-      # end
-
       def fetch_attribute(attr, default = nil)
         fallback = if default
           default
