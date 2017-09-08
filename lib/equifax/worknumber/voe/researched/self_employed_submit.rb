@@ -4,7 +4,9 @@ module Equifax
       module Researched
         class SelfEmployedSubmit < ::Equifax::Worknumber::Base
           def self.call(opts)
-            voe = Equifax::Worknumber::VOE::Researched::Submit.new(opts)
+            voe = Equifax::Worknumber::VOE::Researched::SelfEmployedSubmit.new(opts)
+
+            binding.pry
 
             Equifax::Client.request(
               voe.send(:url),
@@ -17,18 +19,27 @@ module Equifax
             ::Equifax::Worknumber::Base.required_fields + [
               :authform_name,
               :authform_content,
+              :employer_name,
               :tax_preparer_company_name,
               :tax_preparer_city,
               :tax_preparer_state,
               :tax_preparer_postal_code,
-              :tax_preparer_phone_number,
+              :tax_preparer_phone,
             ]
           end
 
           def self.optional_fields
             ::Equifax::Worknumber::Base.optional_fields + [
-              :employer_duns_number,
-              :employer_division,
+              :employer_code,
+              :business_type,
+              :tax_preparer_first_name,
+              :tax_preparer_email,
+              :tax_preparer_last_name,
+              :tax_preparer_middle_name,
+              :tax_preparer_fax,
+              :tax_preparer_address,
+              :tax_preparer_address_cont,
+              :tax_preparer_title,
             ]
           end
 
@@ -49,13 +60,11 @@ module Equifax
                       <LOAN_APPLICATION>
                         <BORROWER _FirstName="#{first_name}" _MiddleName="#{middle_name}" _LastName="#{last_name}" _SSN="#{ssn}" _PrintPositionType="Borrower">
                           <EMPLOYER _Name="#{employer_name}" _City="#{employer_city}" _State="#{employer_state}" _PostalCode="#{employer_postal_code}" _TelephoneNumber="#{employer_phone}" EmploymentBorrowerSelfEmployedIndicator="Y"/>
-                            <SELF_EMPLOYMENT_INFO BusinessType="Retail">
-                                <TAX_PREPARER _VerificationType="Both" _City="#{tax_preparer_city}" _MiddleName="#{tax_preparer_middle_name}" _FirstName="#{tax_preparer_first_name}" _PostalCode="#{tax_preparer_postal_code}" _State="#{tax_preparer_state}" _Address1="#{tax_preparer_address}"
-                                _CompanyName="#{tax_preparer_company_name}" _FaxNumber="#{tax_preparer_fax}" _Address2="#{tax_preparer_address_cont}" _PhoneNumber="#{tax_preparer_phone_number}" _EmailAddress="#{tax_preparer_email}" _Title="#{tax_preparer_title}" _LastName="#{tax_preparer_last_name}">
-                                </TAX_PREPARER>
-                             </SELF_EMPLOYMENT_INFO>
-                           </EMPLOYER>
-                         </BORROWER>
+                            <SELF_EMPLOYMENT_INFO BusinessType="#{business_type}">
+                              <TAX_PREPARER _VerificationType="Both" _City="#{tax_preparer_city}" _MiddleName="#{tax_preparer_middle_name}" _FirstName="#{tax_preparer_first_name}" _PostalCode="#{tax_preparer_postal_code}" _State="#{tax_preparer_state}" _Address1="#{tax_preparer_address}" _CompanyName="#{tax_preparer_company_name}" _FaxNumber="#{tax_preparer_fax}" _Address2="#{tax_preparer_address_cont}" _PhoneNumber="#{tax_preparer_phone}" _EmailAddress="#{tax_preparer_email}" _Title="#{tax_preparer_title}" _LastName="#{tax_preparer_last_name}"></TAX_PREPARER>
+                            </SELF_EMPLOYMENT_INFO>
+                          </EMPLOYER>
+                        </BORROWER>
                       </LOAN_APPLICATION>
                       <EXTENSION>
                         <EXTENSION_SECTION>

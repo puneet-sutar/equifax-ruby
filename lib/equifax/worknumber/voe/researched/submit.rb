@@ -21,13 +21,6 @@ module Equifax
             ]
           end
 
-          def self.optional_fields
-            ::Equifax::Worknumber::Base.optional_fields + [
-              :employer_duns_number,
-              :employer_division,
-            ]
-          end
-
           private
 
           def xml

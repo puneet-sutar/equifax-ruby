@@ -53,7 +53,8 @@ module Equifax
 
       # Either is required not both
       def self.either_field_required
-        [ [:employer_code, :employer_name] ]
+        [[]]
+        # [ [:employer_code, :employer_name] ]
       end
 
       # Optional Fields
