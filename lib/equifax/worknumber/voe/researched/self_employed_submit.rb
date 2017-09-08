@@ -56,12 +56,13 @@ module Equifax
                   <KEY _Name="EMSEmployerCode" _Value="#{employer_code}"/>
                   <REQUEST_DATA>
                     <VOI_REQUEST LenderCaseIdentifier="#{lender_case_id}">
-                      <VOI_REQUEST_DATA VOIReportTypeOtherDescription="WVOE" VOIReportRequestActionType="Submit"/>
+                      <VOI_REQUEST_DATA VOIReportTypeOtherDescription="WVOI" VOIReportRequestActionType="Submit"/>
                       <LOAN_APPLICATION>
                         <BORROWER _FirstName="#{first_name}" _MiddleName="#{middle_name}" _LastName="#{last_name}" _SSN="#{ssn}" _PrintPositionType="Borrower">
-                          <EMPLOYER _Name="#{employer_name}" _City="#{employer_city}" _State="#{employer_state}" _PostalCode="#{employer_postal_code}" _TelephoneNumber="#{employer_phone}" EmploymentBorrowerSelfEmployedIndicator="Y"/>
-                            <SELF_EMPLOYMENT_INFO BusinessType="#{business_type}">
-                              <TAX_PREPARER _VerificationType="Both" _City="#{tax_preparer_city}" _MiddleName="#{tax_preparer_middle_name}" _FirstName="#{tax_preparer_first_name}" _PostalCode="#{tax_preparer_postal_code}" _State="#{tax_preparer_state}" _Address1="#{tax_preparer_address}" _CompanyName="#{tax_preparer_company_name}" _FaxNumber="#{tax_preparer_fax}" _Address2="#{tax_preparer_address_cont}" _PhoneNumber="#{tax_preparer_phone}" _EmailAddress="#{tax_preparer_email}" _Title="#{tax_preparer_title}" _LastName="#{tax_preparer_last_name}"></TAX_PREPARER>
+                          <EMPLOYER _Name="#{employer_name}" _City="#{employer_city}" _State="#{employer_state}" _PostalCode="#{employer_postal_code}" _TelephoneNumber="#{employer_phone}" EmploymentBorrowerSelfEmployedIndicator="Y">
+                            <SELF_EMPLOYMENT_INFO BusinessType="Retail">
+                              <TAX_PREPARER _VerificationType="Both" _City="#{tax_preparer_address}" _MiddleName="#{tax_preparer_middle_name}" _FirstName="#{tax_preparer_first_name}" _PostalCode="#{tax_preparer_postal_code}" _State="#{tax_preparer_state}" _Address1="#{tax_preparer_address}" _CompanyName="#{tax_preparer_company_name}" _FaxNumber="#{tax_preparer_fax}" _Address2="#{tax_preparer_address_cont}" _PhoneNumber="#{tax_preparer_phone}" _EmailAddress="#{tax_preparer_email}" _Title="#{tax_preparer_title}" _LastName="#{tax_preparer_last_name}">
+                              </TAX_PREPARER>
                             </SELF_EMPLOYMENT_INFO>
                           </EMPLOYER>
                         </BORROWER>
