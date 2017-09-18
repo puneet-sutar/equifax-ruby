@@ -5,8 +5,6 @@ module Equifax
         def self.call(opts)
           voi = Equifax::Worknumber::VOI::Instant.new(opts)
 
-          binding.pry
-
           Equifax::Client.request(
             voi.send(:url),
             { request_method: :post },
