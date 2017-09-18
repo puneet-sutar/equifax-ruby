@@ -6,8 +6,6 @@ module Equifax
           def self.call(opts)
             voe = Equifax::Worknumber::VOE::Researched::SelfEmployedSubmit.new(opts)
 
-            binding.pry
-
             Equifax::Client.request(
               voe.send(:url),
               { request_method: :post },
