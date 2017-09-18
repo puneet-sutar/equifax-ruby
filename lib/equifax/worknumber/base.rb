@@ -21,7 +21,7 @@ module Equifax
           return fetch_attribute(meth.to_sym, '')
         end
 
-        super
+        return fetch_attribute(meth.to_sym, '')
       end
 
       def initialize(opts)

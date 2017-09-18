@@ -5,6 +5,8 @@ module Equifax
         def self.call(opts)
           voi = Equifax::Worknumber::VOI::Instant.new(opts)
 
+          binding.pry
+
           Equifax::Client.request(
             voi.send(:url),
             { request_method: :post },
@@ -13,11 +15,10 @@ module Equifax
         end
 
         def self.required_fields
-          super + [
-            :order_number,
-            :organization_name,
-          ]
+          super + [:employer_name]
         end
+
+        private
 
         def xml
           <<-eos

@@ -12,6 +12,10 @@ module Equifax
           )
         end
 
+        def self.required_fields
+          super + [:employer_name]
+        end
+
         private
 
         def xml
