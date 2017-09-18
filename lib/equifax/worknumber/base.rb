@@ -66,6 +66,7 @@ module Equifax
           :employer_state,
           :employer_postal_code,
           :employer_phone,
+          :employer_code,
           :street_address,
           :city,
           :state,
