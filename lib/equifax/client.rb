@@ -14,8 +14,8 @@ module Equifax
 
     def initialize(url, opts = {}, request_params = {})
       @url = url or raise ArgumentError, 'URL Required to make a request'
-      @account_number = Equifax::Client.account_number || ENV['EQUIFAX_ACCOUNT_NUMBER'] || opts[:account_number]
-      @password = Equifax::Client.password || ENV['EQUIFAX_PASSWORD'] || opts[:password]
+      @account_number = opts[:account_number] || Equifax::Client.account_number || ENV['EQUIFAX_ACCOUNT_NUMBER']
+      @password = opts[:password] || Equifax::Client.password || ENV['EQUIFAX_PASSWORD']
       @opts = opts.except(:account_number, :password, :request_method) if opts.any?
       @request_method = opts[:request_method]
       @request_params = request_params
