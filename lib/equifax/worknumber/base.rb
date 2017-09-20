@@ -26,7 +26,8 @@ module Equifax
 
       def initialize(opts)
         # Get a new client to fetch account # and password
-        @client = Equifax::Client.new('')
+        client_options = { account_number: opts[:account_number], password: opts[:password] }
+        @client = Equifax::Client.new('', client_options)
         @account_number = @client.account_number
         @password = @client.password
         @opts = opts

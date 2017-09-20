@@ -1,7 +1,7 @@
 module Equifax
   module Worknumber
-    module VO4506T
-      class Submit < ::Equifax::Worknumber::VO4506T::Base
+    module VOT
+      class Submit < ::Equifax::Worknumber::VOT::Base
 
         def self.required_fields
           super + [ :authform_content, :order_record_id, :requested_years, :transcript_requested ]

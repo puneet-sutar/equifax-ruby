@@ -1,7 +1,7 @@
 module Equifax
   module Worknumber
-    module VO4506T
-      class Status < ::Equifax::Worknumber::VO4506T::Base
+    module VOT
+      class Status < ::Equifax::Worknumber::VOT::Base
         def self.required_fields
           super + [ :order_number ]
         end

@@ -1,6 +1,6 @@
 module Equifax
   module Worknumber
-    module VO4506T
+    module VOT
       class Base < ::Equifax::Worknumber::Base
 
         def self.call(opts)
