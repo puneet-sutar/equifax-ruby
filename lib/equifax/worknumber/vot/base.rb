@@ -49,6 +49,10 @@ module Equifax
           "2.3.1"
         end
 
+        def request_type
+          filing_type.to_s.downcase.capitalize
+        end
+
       end
     end
   end
