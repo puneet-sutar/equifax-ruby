@@ -32,7 +32,7 @@ module Equifax
               xml.KEY _Name: "OrderRecordID", _Value: order_record_id
               xml.REQUEST_DATA do
                 xml.VOI_REQUEST LenderCaseIdentifier: lender_case_id, MISMOVersionID: mismo_version_id do
-                  xml.VOI_REQUEST_DATA VOIRequestType: filing_type,
+                  xml.VOI_REQUEST_DATA VOIRequestType: request_type,
                                        VOIReportRequestActionType: "Submit",
                                        VOIReportRequestActionTypeOtherDescription: "4506T",
                                        VOIReportType: "Other"
