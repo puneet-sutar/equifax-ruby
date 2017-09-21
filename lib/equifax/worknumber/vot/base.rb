@@ -3,6 +3,10 @@ module Equifax
     module VOT
       class Base < ::Equifax::Worknumber::Base
 
+        def self.required_fields
+          super + [ :filing_type ]
+        end
+
         def self.call(opts)
           new(opts).call
         end
