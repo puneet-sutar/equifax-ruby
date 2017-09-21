@@ -25,7 +25,7 @@ module Equifax
               xml.KEY _Name: "EMSOrderNumber", _Value: order_number
               xml.REQUEST_DATA do
                 xml.VOI_REQUEST MISMOVersionID: mismo_version_id do
-                  xml.VOI_REQUEST_DATA VOIRequestType: "Individual",
+                  xml.VOI_REQUEST_DATA VOIRequestType: filing_type,
                                        VOIReportRequestActionType: action_type,
                                        VOIReportType: "Other"
                 end
