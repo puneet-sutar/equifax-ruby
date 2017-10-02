@@ -37,14 +37,6 @@ module Equifax
           end
         end
 
-        def submitting_party_tag(xml)
-          xml.SUBMITTING_PARTY _Name: vendor_id,
-                               LoginAccountIdentifier: account_number,
-                               LoginAccountPassword: password do
-            yield if block_given?
-          end
-        end
-
         def mismo_version_id
           "2.3.1"
         end

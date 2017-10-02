@@ -74,26 +74,6 @@ module Equifax
           end
         end
 
-        def employer_code_xml
-          xml_builder.KEY _Name: 'EMSEmployerCode', _Value: employer_code
-        end
-
-        def employer_duns_number_xml
-          xml_builder.KEY _Name: 'EMSEmployerDunsNumber', _Value: employer_duns_number
-        end
-
-        def emplyer_division_xml
-          xml_builder.KEY _Name: 'EMSEmployerDivision', _Value: employer_division
-        end
-
-        def employer_verification_documents_required
-          xml_builder.KEY _Name: 'EmployerVerificationDocumentsRequired', _Value: "N"
-        end
-
-        def call_recording_required_xml
-          xml_builder.KEY _Name: 'CallRecordingRequired', _Value: "N"
-        end
-
         def request_date
           super.presence || Time.now.strftime("%Y-%m-%d")
         end
