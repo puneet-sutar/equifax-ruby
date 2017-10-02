@@ -2,6 +2,7 @@ require 'net/http'
 require 'json'
 require 'ox'
 require 'active_support/core_ext/hash'
+require 'nokogiri'
 
 require 'equifax/client'
 
@@ -22,6 +23,12 @@ require 'equifax/worknumber/voi/researched/retrieve'
 require 'equifax/worknumber/voi/researched/status'
 require 'equifax/worknumber/voi/researched/submit'
 require 'equifax/worknumber/voi/researched/reverify'
+
+#4506T
+require 'equifax/worknumber/vot/base'
+require 'equifax/worknumber/vot/submit'
+require 'equifax/worknumber/vot/status'
+require 'equifax/worknumber/vot/retrieve'
 
 require 'equifax/version'
 
