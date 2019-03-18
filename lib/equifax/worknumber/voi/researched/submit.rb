@@ -46,7 +46,7 @@ module Equifax
                       <EXTENSION>
                         <EXTENSION_SECTION>
                           <EXTENSION_SECTION_DATA>
-                            <EMBEDDED_FILE _Name="#{authform_name}" _EncodingType="Base64">
+                            <EMBEDDED_FILE _Name="#{authform_name}" _Type="tiff" _EncodingType="Base64" MIMEType="tiff">
                               <DOCUMENT>#{authform_content}</DOCUMENT>
                             </EMBEDDED_FILE>
                           </EXTENSION_SECTION_DATA>
